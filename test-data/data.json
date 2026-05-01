@@ -1,0 +1,15 @@
+{
+  "validUser": {
+    "username": "${USERNAME}",
+    "password": "${PASSWORD}"
+  },
+  "invalidUser": {
+    "username": "wronguser",
+    "password": "wrongpassword"
+  },
+  "uniqueUser": {
+    "email": "${EMAIL}",
+    "password": "${PASSWORD}"
+  }
+}
+
