@@ -28,6 +28,9 @@ A production-ready, AI-assisted test automation framework built with **TypeScrip
 ```text
 playwright-web-automation-demo-repo/
 │
+├── .github/workflows/           # CI/CD configurations
+│   └── playwright.yml           # GitHub Actions workflow for automated testing
+│
 ├── features/                    # Gherkin BDD scenarios
 │   ├── e2e/
 │   │   ├── my-account.feature   # Login, registration, logout flows
@@ -147,6 +150,23 @@ npm run report
 ```
 
 The HTML report is written to `reports/cucumber-report.html` after every run.
+
+---
+
+## 🔄 CI/CD Pipeline (GitHub Actions)
+
+This project is fully integrated with GitHub Actions to provide Continuous Integration (CI). 
+
+The workflow is defined in `.github/workflows/playwright.yml` and triggers automatically on:
+- **Pushes** to the `main` or `master` branches
+- **Pull Requests** targeting `main` or `master`
+
+**What the pipeline does:**
+1. Checks out the code and sets up Node.js.
+2. Installs all project dependencies cleanly (`npm ci`).
+3. Installs Playwright Browsers (`npx playwright install --with-deps chromium`).
+4. Executes the BDD test suite (`npm test`).
+5. Uploads the generated HTML reports to GitHub artifacts, allowing you to view detailed test results and trace files even if tests fail in the cloud.
 
 ---
 
