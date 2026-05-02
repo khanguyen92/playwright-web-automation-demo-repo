@@ -21,6 +21,16 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
       
+    - name: Verify Secrets
+      run: |
+        if [ -z "$BASE_URL" ]; then
+          echo "Error: BASE_URL secret is missing or empty!"
+          exit 1
+        fi
+        echo "Secrets loaded successfully."
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+        
     - name: Run Playwright tests
       run: npm test
       env:
