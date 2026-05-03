@@ -17,7 +17,7 @@ A production-ready, AI-assisted test automation framework built with **TypeScrip
 | **Dynamic Data** | Test data resolved from `qa.env` and `test-data/data.json` at runtime via `${VAR}` syntax |
 | **Parallel Execution** | 4 parallel workers configured; no shared state between tests |
 | **Auto-Waiting** | Zero `waitForTimeout()` calls — uses element-specific `waitFor({ state: 'visible' })` |
-| **HTML Reports** | Auto-generated Cucumber HTML report after every run |
+| **Allure Reports** | Interactive, rich Allure HTML reports auto-generated after every run |
 | **API Testing** | Integrated Playwright `APIRequestContext` for API layer tests |
 | **MCP AI Layer** | AI agent scaffolding — parse → crawl live DOM → generate POMs and feature files |
 
@@ -82,7 +82,8 @@ playwright-web-automation-demo-repo/
 ├── test-data/
 │   └── data.json                # Static test inputs (credentials replaced with ${VAR})
 │
-├── reports/                     # Generated HTML reports (git-ignored)
+├── allure-results/              # Raw JSON results for Allure (git-ignored)
+├── allure-report/               # Generated Allure HTML dashboard (git-ignored)
 ├── qa.env                       # Local secrets — NEVER commit (git-ignored)
 ├── qa.env.example               # Template for new developers
 ├── cucumber.js                  # Cucumber runner config (format, paths, parallel)
@@ -134,22 +135,18 @@ APP_PASSWORD=your_password
 
 | Command | Description |
 |---|---|
-| `npm run test` | Run full suite (16 scenarios, 74 steps) |
-| `npm run test:report` | Run tests then auto-open HTML report |
-| `npm run report` | Open the last generated report |
+| `npm run test` | Run full suite cleanly (deletes old `allure-results` first) |
+| `npm run report` | Generate and open the interactive Allure HTML report |
 
 ```bash
 # Run all tests
 npm run test
 
-# Run and open report automatically
-npm run test:report
-
-# Open last report without re-running
+# Generate and view the interactive Allure report
 npm run report
 ```
 
-The HTML report is written to `reports/cucumber-report.html` after every run.
+The raw JSON results are written to `allure-results/` and the HTML report is generated into `allure-report/`.
 
 ---
 
@@ -166,7 +163,7 @@ The workflow is defined in `.github/workflows/playwright.yml` and triggers autom
 2. Installs all project dependencies cleanly (`npm ci`).
 3. Installs Playwright Browsers (`npx playwright install --with-deps chromium`).
 4. Executes the BDD test suite (`npm test`).
-5. Uploads the generated HTML reports to GitHub artifacts, allowing you to view detailed test results and trace files even if tests fail in the cloud.
+5. Generates the Allure report and uploads the `allure-report/` directory to GitHub artifacts, allowing you to view detailed interactive test results and trace files even if tests fail in the cloud.
 
 ---
 

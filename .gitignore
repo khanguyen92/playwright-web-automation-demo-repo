@@ -1,6 +1,7 @@
 node_modules/
 dist/
-reports/
+allure-results/
+allure-report/
 qa.env
 .system_generated/
 .playwright-mcp/

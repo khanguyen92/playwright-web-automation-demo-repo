@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js",
-    "test:report": "cucumber-js && start reports/cucumber-report.html",
-    "report": "start reports/cucumber-report.html"
+    "test": "rimraf allure-results && cucumber-js",
+    "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +14,10 @@
     "@cucumber/cucumber": "^12.8.1",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
+    "allure-commandline": "^2.38.1",
+    "allure-cucumberjs": "^3.7.1",
     "dotenv": "^17.4.2",
+    "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   }
